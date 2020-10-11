@@ -4,7 +4,7 @@ var Categorie = require('../models/categorie');
 const { body,validationResult } = require("express-validator");
 
 var async = require('async');
-
+// shows a single categorie details
 exports.categorie_detail = function(req, res) {
   async.parallel({
     categorie: function(callback) {
@@ -29,7 +29,7 @@ exports.categorie_detail = function(req, res) {
     res.render('categorie_detail', { title: 'Categorie Detail', categorie: results.categorie, categorie_item: results.categorie_item } );
   });
 }
-
+// shows a list of all categories
 exports.categorie_list = function(req, res) {
   Categorie.find()
     .sort([['name', 'ascending']])

@@ -6,9 +6,18 @@ const { body,validationResult } = require("express-validator");
 var async = require('async');
 
 exports.index = function(req, res) {
-
+  async.parallel({
+    item_count: function(callback) {
+        Item.count(callback);
+    },
+    categorie_count: function(callback) {
+        Categorie.count(callback);
+    },
+}, function(err, results) {
+    res.render('index', { title: 'Inventory Home', error: err, data: results });
+});
 }
-
+// shows one item details
 exports.item_detail = function(req, res) {
   async.parallel({
     item: function(callback) {
@@ -28,7 +37,7 @@ exports.item_detail = function(req, res) {
     res.render('item_detail', { title: 'Title', item:  results.item } );
 });
 }
-
+// shows list of all items
 exports.item_list = function(req, res) {
   Item.find({}, 'title categorie')
     .populate('categorie').exec(function (err, list_items) {
