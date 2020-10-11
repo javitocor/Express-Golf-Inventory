@@ -39,3 +39,22 @@ exports.category_list = function(req, res) {
       res.render('categories_list', { title: 'Categorie List', list_categories:  list_categories});
     });
 }
+
+exports.category_create_get = function(req, res) {
+
+}
+exports.category_create_post = function(req, res) {
+
+}
+exports.category_update_get = function(req, res) {
+
+}
+exports.category_update_post = function(req, res) {
+
+}
+exports.category_delete_get = function(req, res) {
+
+}
+exports.category_delete_post = function(req, res) {
+  
+}

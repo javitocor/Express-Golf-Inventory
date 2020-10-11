@@ -49,3 +49,22 @@ exports.item_list = function(req, res) {
     });
 }
 
+exports.item_create_get = function(req, res) {
+
+}
+exports.item_create_post = function(req, res) {
+
+}
+exports.item_update_get = function(req, res) {
+
+}
+exports.item_update_post = function(req, res) {
+
+}
+exports.item_delete_get = function(req, res) {
+
+}
+exports.item_delete_post = function(req, res) {
+  
+}
+
