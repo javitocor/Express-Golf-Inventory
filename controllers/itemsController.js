@@ -10,7 +10,23 @@ exports.index = function(req, res) {
 }
 
 exports.item_detail = function(req, res) {
+  async.parallel({
+    item: function(callback) {
 
+      Item.findById(req.params.id)
+          .populate('categorie')
+          .exec(callback);
+    }
+}, function(err, results) {
+    if (err) { return next(err); }
+    if (results.item==null) { // No results.
+        var err = new Error('Book not found');
+        err.status = 404;
+        return next(err);
+    }
+    // Successful, so render.
+    res.render('item_detail', { title: 'Title', item:  results.item } );
+});
 }
 
 exports.item_list = function(req, res) {
