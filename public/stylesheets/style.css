@@ -3,3 +3,7 @@
   padding: 0;
   list-style: none;
 }
+
+.sidebar-nav li a:hover {
+  color: rgb(2, 85, 2);
+}

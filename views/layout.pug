@@ -11,21 +11,22 @@ html(lang='en')
   body
     div(class='container-fluid')
       div(class='row')
-        div(class='col-sm-2')
+        div(class='col-sm-2 bg-gradient-secondary')
           block sidebar
+            h5(class="text-center font-weight-bold text-white mb-3") Golf Equipment Inc.
             ul(class='sidebar-nav')
               li 
-                a(href='/catalog') Home
+                a(href='/catalog' class="text-success") Home
               li 
-                a(href='/catalog/items') All Items
+                a(href='/catalog/items' class="text-success") All Items
               li 
-                a(href='/catalog/categories') All Categories
+                a(href='/catalog/categories' class="text-success") All Categories
               li 
                 hr
               li 
-                a(href='/catalog/item/create') Create new item
+                a(href='/catalog/item/create' class="text-success") Create new item
               li 
-                a(href='/catalog/categorie/create') Create new categorie
+                a(href='/catalog/categorie/create' class="text-success") Create new categorie
                 
         div(class='col-sm-10')
           block content

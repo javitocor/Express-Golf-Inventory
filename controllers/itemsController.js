@@ -14,7 +14,7 @@ exports.index = function(req, res) {
         Categorie.count(callback);
     },
   }, function(err, results) {
-      res.render('index', { title: 'Inventory Home', error: err, data: results });
+      res.render('index', { title: 'Golf Equipment Home', error: err, data: results });
   });
 }
 // shows one item details
