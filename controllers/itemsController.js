@@ -13,9 +13,9 @@ exports.index = function(req, res) {
     categorie_count: function(callback) {
         Categorie.count(callback);
     },
-}, function(err, results) {
-    res.render('index', { title: 'Inventory Home', error: err, data: results });
-});
+  }, function(err, results) {
+      res.render('index', { title: 'Inventory Home', error: err, data: results });
+  });
 }
 // shows one item details
 exports.item_detail = function(req, res) {

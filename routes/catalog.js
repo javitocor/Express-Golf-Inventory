@@ -12,7 +12,6 @@ var categorie_controller = require('../controllers/categorieController');
 router.get('/', item_controller.index);  
 // GET request for one Item.
 router.get('/item/:id', item_controller.item_detail);
-
 // GET request for list of all Items.
 router.get('/items', item_controller.item_list);
 
@@ -20,7 +19,6 @@ router.get('/items', item_controller.item_list);
 
 // GET request for one Categorie.
 router.get('/categorie/:id', categorie_controller.categorie_detail);
-
 // GET request for list of all Categories.
 router.get('/categories', categorie_controller.categorie_list);
 
