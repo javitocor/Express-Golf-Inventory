@@ -5,15 +5,15 @@ const { body,validationResult } = require("express-validator");
 
 var async = require('async');
 // shows a single categorie details
-exports.categorie_detail = function(req, res) {
+exports.category_detail = function(req, res) {
   async.parallel({
-    categorie: function(callback) {
+    category: function(callback) {
 
       Categorie.findById(req.params.id)
           .exec(callback);
     },
 
-    categorie_item: function(callback) {
+    category_item: function(callback) {
       Item.find({ 'categorie': req.params.id })
       .exec(callback);
     },
@@ -21,16 +21,16 @@ exports.categorie_detail = function(req, res) {
   }, function(err, results) {
     if (err) { return next(err); }
     if (results.categorie==null) { // No results.
-        var err = new Error('Categorie not found');
+        var err = new Error('Category not found');
         err.status = 404;
         return next(err);
     }
     // Successful, so render.
-    res.render('categorie_detail', { title: 'Categorie Detail', categorie: results.categorie, categorie_item: results.categorie_item } );
+    res.render('category_detail', { title: 'Category Detail', category: results.category, category_item: results.category_item } );
   });
 }
 // shows a list of all categories
-exports.categorie_list = function(req, res) {
+exports.category_list = function(req, res) {
   Categorie.find()
     .sort([['name', 'ascending']])
     .exec(function (err, list_categories) {
