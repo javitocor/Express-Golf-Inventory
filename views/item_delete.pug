@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+  h1 #{title}: #{item.name}
+  
+  p #[strong Name:] #{item.name}
+  p #[strong Description:] #{item.description}
+  p #[strong Stock:] #{item.stock}
+  p #[strong Price:] #{item.price}
+  p #[strong Category:] 
+    each val in item.categorie
+      a(href=val.url) #{val.name}
+      |, 
+
+  hr
+  
+  p Do you really want to delete this Book?
+    
+    form(method='POST' action='')
+      div.form-group
+        input#id.form-control(type='hidden',name='id', required='true', value=item._id )
+
+      button.btn.btn-primary(type='submit') Delete Item
+  
+    

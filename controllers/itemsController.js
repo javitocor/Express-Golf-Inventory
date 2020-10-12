@@ -244,6 +244,8 @@ exports.item_delete_get = function (req, res) {
             res.redirect('/catalog/items');
         });
     });
+    // Successful, so render.
+    res.render('item_delete', { title: 'Delete Item', item: results.item } );
 }
 exports.item_delete_post = function (req, res) {
     async.parallel({
