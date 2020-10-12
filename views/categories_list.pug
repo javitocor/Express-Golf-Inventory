@@ -7,7 +7,6 @@ block content
   each val in list_categories
     li 
       a(href=val.url) #{val.name}
-      | #[strong Description:] #{val.decription}
 
   else
-    li There are no genre.
+    li There are no Categories.
