@@ -4,7 +4,7 @@ block content
 
   h1 #{title}
           
-  form(method='POST' action='')
+  form(method='POST' action='' enctype="multipart/form-data")
     div.form-group
       label(for='name') Name:
       input#name.form-control(type='text', placeholder='Add name of item' name='name' required='true' value=(undefined===item ? '' : item.name) )
@@ -17,6 +17,9 @@ block content
     div.form-group
       label(for='price') Price ($):
       input#price.form-control(type='number', name='price' required='true' value=(undefined===item ? '' : item.price) )
+    div.form-group
+      label(for='image') Image:
+      <input type="file" class="form-control-file" name="image">
     div.form-group
       label Category:
       div
