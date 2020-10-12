@@ -9,6 +9,8 @@ block content
     p #[strong Description:] #{item.description}
     p #[strong Stock:]  #{item.stock}
     p #[strong Price:]  #{item.price} $
+    if item.imageUrl
+      img(src=item.imageUrl)
     p #[strong Categories:]  
       each val, index in item.categorie
         a(href=val.url) #{val.name}

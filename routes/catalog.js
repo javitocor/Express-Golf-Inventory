@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var path = require('path');
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: './public/images',
