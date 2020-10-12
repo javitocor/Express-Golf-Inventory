@@ -9,7 +9,11 @@ block content
     p #[strong Description:] #{item.description}
     p #[strong Stock:]  #{item.stock}
     p #[strong Price:]  #{item.price} $
-    p #[strong Categories:]  #{item.categorie}
+    p #[strong Categories:]  
+      each val, index in item.categorie
+        a(href=val.url) #{val.name}
+        if index < item.categorie.length - 1
+          |, 
     
   hr
   p

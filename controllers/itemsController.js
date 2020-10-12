@@ -29,47 +29,45 @@ exports.item_detail = function (req, res) {
     }, function (err, results) {
         if (err) { return next(err); }
         if (results.item == null) { // No results.
-            var err = new Error('Book not found');
+            var err = new Error('Item not found');
             err.status = 404;
             return next(err);
         }
         // Successful, so render.
+        console.log(results.item)
         res.render('item_detail', { title: 'Title', item: results.item });
     });
 }
 // shows list of all items
 exports.item_list = function (req, res) {
-    Item.find({}, 'title categorie')
+    Item.find({}, 'name categorie')
         .populate('categorie').exec(function (err, list_items) {
             if (err) { return next(err) }
             else {
                 // Successful, so render
-                res.render('items_list', { title: 'Book List', item_list: list_items });
+                res.render('items_list', { title: 'Item List', item_list: list_items });
             }
         });
 }
 
 exports.item_create_get = function (req, res) {
     async.parallel({
-        items: function (callback) {
-            Item.find(callback);
-        },
         categories: function (callback) {
             Categorie.find(callback);
         },
     }, function (err, results) {
         if (err) { return next(err); }
-        res.render('item_form', { title: 'Create Item', items: results.items, categories: results.categories });
+        res.render('item_form', { title: 'Create Item', categories: results.categories });
     });
 
 }
 exports.item_create_post = [
     (req, res, next) => {
-        if (!(req.body.categorie instanceof Array)) {
-            if (typeof req.body.categorie === 'undefined')
-                req.body.categorie = [];
+        if (!(req.body.category instanceof Array)) {
+            if (typeof req.body.category === 'undefined')
+                req.body.category = [];
             else
-                req.body.categorie = new Array(req.body.categorie);
+                req.body.category = new Array(req.body.category);
         }
         next();
     },
@@ -92,7 +90,7 @@ exports.item_create_post = [
             {
                 name: req.body.name,
                 description: req.body.description,
-                categorie: req.body.categorie,
+                categorie: req.body.category,
                 stock: req.body.stock,
                 price: req.body.price
             });
@@ -113,7 +111,7 @@ exports.item_create_post = [
 
                 // Mark our selected categories as checked.
                 for (let i = 0; i < results.categories.length; i++) {
-                    if (item.categories.indexOf(results.categories[i]._id) > -1) {
+                    if (item.categorie.indexOf(results.categories[i]._id) > -1) {
                         results.categories[i].checked = 'true';
                     }
                 }
@@ -156,18 +154,18 @@ exports.item_update_get = function (req, res) {
                 }
             }
         }
-        res.render('item_form', { title: 'Update Item', items: results.items, categories: results.categories });
+        res.render('item_form', { title: 'Update Item', item: results.item, categories: results.categories });
     });
 }
 exports.item_update_post = [
 
     // Convert the categorie to an array.
     (req, res, next) => {
-        if (!(req.body.categorie instanceof Array)) {
-            if (typeof req.body.categorie === 'undefined')
-                req.body.categorie = [];
+        if (!(req.body.category instanceof Array)) {
+            if (typeof req.body.category === 'undefined')
+                req.body.category = [];
             else
-                req.body.categorie = new Array(req.body.categorie);
+                req.body.category = new Array(req.body.category);
         }
         next();
     },
@@ -177,7 +175,7 @@ exports.item_update_post = [
     body('description', 'Description must not be empty.').isLength({ min: 1 }).trim().escape(),
     body('price', 'price must not be empty.').isLength({ min: 1 }).trim().escape(),
     body('stock', 'stock must not be empty').isLength({ min: 1 }).trim().escape(),
-    body('categorie.*').escape(),
+    body('category.*').escape(),
 
     // Process request after validation and sanitization.
     (req, res, next) => {
@@ -186,13 +184,13 @@ exports.item_update_post = [
         const errors = validationResult(req);
 
         // Create a Book object with escaped/trimmed data and old id.
-        var item = new Book(
+        var item = new Item(
             {
                 name: req.body.name,
                 description: req.body.description,
                 stock: req.body.stock,
                 price: req.body.price,
-                categorie: (typeof req.body.categorie === 'undefined') ? [] : req.body.categorie,
+                categorie: (typeof req.body.category === 'undefined') ? [] : req.body.category,
                 _id: req.params.id // This is required, or a new ID will be assigned!
             });
 
@@ -233,19 +231,17 @@ exports.item_update_post = [
 exports.item_delete_get = function (req, res) {
     async.parallel({
         item: function (callback) {
-            Item.findById(req.body.id).populate('categorie').exec(callback);
+            Item.findById(req.params.id).exec(callback);
         },
     }, function (err, results) {
         if (err) { return next(err); }
-        // Success
-        Item.findByIdAndRemove(req.body.id, function deleteBook(err) {
-            if (err) { return next(err); }
-            // Success - got to items list.
-            res.redirect('/catalog/items');
-        });
+        if (results.item==null) { // No results.
+            res.redirect('/catalog/genres');
+        }
+        res.render('item_delete', { title: 'Delete Item', item: results.item } );
     });
     // Successful, so render.
-    res.render('item_delete', { title: 'Delete Item', item: results.item } );
+    
 }
 exports.item_delete_post = function (req, res) {
     async.parallel({
@@ -260,7 +256,7 @@ exports.item_delete_post = function (req, res) {
             return next(err);
         }
         // Success.
-        Item.findByIdAndRemove(req.body.id, function deleteBook(err) {
+        Item.findByIdAndRemove(req.params.id, function deleteBook(err) {
             if (err) { return next(err); }
             // Success - got to items list.
             res.redirect('/catalog/items');
