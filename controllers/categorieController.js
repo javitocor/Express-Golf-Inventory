@@ -41,11 +41,59 @@ exports.category_list = function(req, res) {
 }
 
 exports.category_create_get = function(req, res) {
-
+  res.render('category_form', { title: 'Create Category'});
 }
-exports.category_create_post = function(req, res) {
+exports.category_create_post = [
 
-}
+  // Validate and santise the name field.
+  body('name', 'Category name required').trim().isLength({ min: 1 }).escape(),
+  body('desription', 'Description required').trim().isLength({ min: 1 }).escape(),
+
+  // Process request after validation and sanitization.
+  (req, res, next) => {
+
+      // Extract the validation errors from a request.
+      const errors = validationResult(req);
+
+      // Create a category object with escaped and trimmed data.
+      var category = new Categorie(
+        { 
+          name: req.body.name,
+          description: req.body.description,
+        }
+      );
+
+
+      if (!errors.isEmpty()) {
+          // There are errors. Render the form again with sanitized values/error messages.
+          res.render('category_form', { title: 'Create Category', category: category, errors: errors.array()});
+      return;
+      }
+      else {
+          // Data from form is valid.
+          // Check if category with same name already exists.
+          Categorie.findOne({ 'name': req.body.name })
+              .exec( function(err, found_cat) {
+                   if (err) { return next(err); }
+
+                   if (found_cat) {
+                       // category exists, redirect to its detail page.
+                       res.redirect(found_cat.url);
+                   }
+                   else {
+
+                    category.save(function (err) {
+                         if (err) { return next(err); }
+                         // category saved. Redirect to category detail page.
+                         res.redirect(category.url);
+                       });
+
+                   }
+
+               });
+      }
+  }
+];
 exports.category_update_get = function(req, res) {
 
 }
