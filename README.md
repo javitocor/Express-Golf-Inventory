@@ -23,6 +23,7 @@
 
 >  A simple inventory web app to keep track of the available items and categories. Built with Express and Mongoose. The Odin Project.
 
+![screenshot](screenshot.png)
 
 Additional description about the project and its features.
 
