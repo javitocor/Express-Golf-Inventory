@@ -19,7 +19,7 @@ block content
       input#price.form-control(type='number', name='price' required='true' value=(undefined===item ? '' : item.price) )
     div.form-group
       label(for='image') Image:
-      <input type="file" class="form-control-file" name="image">
+      input#image.form-control(type="file" class="form-control-file" name="image")
     div.form-group
       label Category:
       div
