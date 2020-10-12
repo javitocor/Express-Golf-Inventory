@@ -1,0 +1,15 @@
+extends layout
+
+block content
+
+  h1 Category: #{category.name}
+  
+  div(style='margin-left:20px;margin-top:20px')
+
+    p #{category.description}
+    
+  hr
+  p
+    a(href=category.url+'/delete') Delete Category
+  p
+    a(href=category.url+'/update') Update Category
