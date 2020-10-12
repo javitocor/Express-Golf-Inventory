@@ -21,7 +21,7 @@
 
 # Express-Golf-Inventory
 
->  A simple inventory web app to keep track of the available itams and coategories. Built with Express and Mongoose. The Odin Project.
+>  A simple inventory web app to keep track of the available items and categories. Built with Express and Mongoose. The Odin Project.
 
 
 Additional description about the project and its features.
