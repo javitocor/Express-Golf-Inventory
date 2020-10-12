@@ -8,6 +8,7 @@ var ItemSchema = new Schema({
     categorie: [{type: Schema.ObjectId, ref: 'Categorie', required: true}],
     price: {type: Number, required: true, min: 0},
     stock: {type: Number, required: true, min: 0},
+    image: {type: String},
 });
 
 // Virtual for this Item instance URL.

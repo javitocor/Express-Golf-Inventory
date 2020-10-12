@@ -34,7 +34,6 @@ exports.item_detail = function (req, res) {
             return next(err);
         }
         // Successful, so render.
-        console.log(results.item)
         res.render('item_detail', { title: 'Title', item: results.item });
     });
 }
@@ -92,7 +91,8 @@ exports.item_create_post = [
                 description: req.body.description,
                 categorie: req.body.category,
                 stock: req.body.stock,
-                price: req.body.price
+                price: req.body.price,
+                image: req.file.filename,
             });
 
         if (!errors.isEmpty()) {
@@ -183,7 +183,7 @@ exports.item_update_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create a Book object with escaped/trimmed data and old id.
+        // Create a Itam object with escaped/trimmed data and old id.
         var item = new Item(
             {
                 name: req.body.name,
@@ -191,6 +191,7 @@ exports.item_update_post = [
                 stock: req.body.stock,
                 price: req.body.price,
                 categorie: (typeof req.body.category === 'undefined') ? [] : req.body.category,
+                image: req.file.filename,
                 _id: req.params.id // This is required, or a new ID will be assigned!
             });
 
