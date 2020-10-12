@@ -9,18 +9,15 @@ exports.category_detail = function (req, res) {
   async.parallel({
     category: function (callback) {
 
-      Categorie.findById(req.params.id)
-        .exec(callback);
+      Categorie.findById(req.params.id).exec(callback);
     },
-
     category_item: function (callback) {
-      Item.find({ 'categorie': req.params.id })
-        .exec(callback);
+      Item.find({ 'categorie': req.params.id }).exec(callback);
     },
 
   }, function (err, results) {
     if (err) { return next(err); }
-    if (results.categorie == null) { // No results.
+    if (results.category == null) { // No results.
       var err = new Error('Category not found');
       err.status = 404;
       return next(err);
@@ -47,7 +44,7 @@ exports.category_create_post = [
 
   // Validate and santise the name field.
   body('name', 'Category name required').trim().isLength({ min: 1 }).escape(),
-  body('desription', 'Description required').trim().isLength({ min: 1 }).escape(),
+  body('description', 'Description required').trim().isLength({ min: 1 }).escape(),
 
   // Process request after validation and sanitization.
   (req, res, next) => {
@@ -119,7 +116,7 @@ exports.category_update_post = [
     const errors = validationResult(req);
 
     // Create a genre object with escaped and trimmed data (and the old id!)
-    var category = new Genre(
+    var category = new Categorie(
       {
         name: req.body.name,
         description: req.body.description,

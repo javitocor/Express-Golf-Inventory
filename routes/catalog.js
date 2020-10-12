@@ -24,7 +24,7 @@ router.post('/item/:id/update', item_controller.item_update_post)
 router.get('/item/:id/delete', item_controller.item_delete_get)
 router.post('/item/:id/delete', item_controller.item_delete_post)
 
-// Categorie routes
+// Category routes
 
 //GET&POST request to create category
 router.get('/category/create', category_controller.category_create_get)

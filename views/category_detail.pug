@@ -6,8 +6,11 @@ block content
   
   div(style='margin-left:20px;margin-top:20px')
 
-    p #{category.description}
-    
+    p #[strong Description:] #{category.description}
+
+    each val in category_item
+      li 
+        a(href=val.url) #{val.name}
   hr
   p
     a(href=category.url+'/delete') Delete Category
