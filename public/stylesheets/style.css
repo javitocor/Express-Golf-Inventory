@@ -7,3 +7,7 @@
 .sidebar-nav li a:hover {
   color: rgb(2, 85, 2);
 }
+
+.side {
+  height: 100vh;
+}

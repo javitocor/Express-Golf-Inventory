@@ -1,12 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  
-  ul
-  each val in item_list
-    li 
-      a(href=val.url) #{val.name}
+  h1(class="text-center font-weight-bold text-dark mt-3 mb-2") #{title}
+  div(class="w-75 mx-auto")
+    ul(class="list-group list-group-flush")
+    each val in item_list
+      li(class="list-group-item list-group-item-success text-center")
+        a(href=val.url class="font-weight-bold text-success") #{val.name}
 
-  else
-    li There are no Items.
+    else
+      li There are no Items.

@@ -2,32 +2,32 @@ extends layout
 
 block content
 
-  h1 #{title}
+  h1(class="text-center font-weight-bold text-dark my-3") #{title}
           
-  form(method='POST' action='' enctype="multipart/form-data")
+  form(method='POST' action='' enctype="multipart/form-data" class="w-50 m-auto")
     div.form-group
-      label(for='name') Name:
+      label(for='name' class="text-success font-weight-bold") Name:
       input#name.form-control(type='text', placeholder='Add name of item' name='name' required='true' value=(undefined===item ? '' : item.name) )
     div.form-group
-      label(for='description') Description:
+      label(for='description' class="text-success font-weight-bold") Description:
       input#description.form-control(type='text', placeholder='Add the description' name='description' required='true' value=(undefined===item ? '' : item.description) )
     div.form-group
-      label(for='stock') Stock:
+      label(for='stock' class="text-success font-weight-bold") Stock:
       input#stock.form-control(type='number', name='stock' required='true' value=(undefined===item ? '' : item.stock) )
     div.form-group
-      label(for='price') Price ($):
+      label(for='price' class="text-success font-weight-bold") Price ($):
       input#price.form-control(type='number', name='price' required='true' value=(undefined===item ? '' : item.price) )
     div.form-group
-      label(for='image') Image:
+      label(for='image' class="text-success font-weight-bold") Image:
       input#image.form-control(type="file" class="form-control-file" name="image")
     div.form-group
-      label Category:
+      label( class="text-success font-weight-bold") Category:
       div
         for category in categories
           div(style='display: inline; padding-right:10px;')
             input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id, checked=category.checked )
-            label(for=category._id) #{category.name}
-    button.btn.btn-primary(type='submit') Submit
+            label.pl-2.text-success.font-weight-bold(for=category._id) #{category.name}
+    button.btn.btn-success(type='submit') Submit
 
   if errors 
     ul

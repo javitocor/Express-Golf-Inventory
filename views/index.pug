@@ -1,18 +1,18 @@
 extends layout
 
 block content
-  div.jumbotron
-    h1(class="display-4") #{title}
-    p(class="lead") Welcome to the biggest golf equipment website!
+  div.jumbotron.bg-secondary
+    h1(class="display-4 font-weight-bold") #{title}
+    p(class="lead  font-weight-bold") Welcome to the biggest golf equipment website!
     hr(class="my-4")
-    p Enjoy the best prices worldwide!
+    p(class=" font-weight-bold") Enjoy the best prices worldwide!
     p(class="lead")
-      a(href='/catalog/items' class="btn btn-primary btn-lg") See All Items
+      a(href='/catalog/items' class="btn btn-success btn-lg") See All Items
   if error
     p Error getting dynamic content.
   else
     div(class="w-50 mx-auto mt-3") 
       h4(class="font-weight-bold text-center text-dark") Our inventory has the following record counts:
       ul(class="list-group")
-        li(class="list-group-item list-group-item-primary list-group-item-action") #[strong Items:] !{data.item_count}
-        li(class="list-group-item list-group-item-primary list-group-item-action") #[strong Categories:] !{data.categorie_count}
+        li(class="list-group-item list-group-item-success list-group-item-action") #[strong Items:] !{data.item_count}
+        li(class="list-group-item list-group-item-success list-group-item-action") #[strong Categories:] !{data.categorie_count}

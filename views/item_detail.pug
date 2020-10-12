@@ -2,7 +2,7 @@ extends layout
 
 block content
 
-  h1 Item: #{item.name}
+  h1(class="text-center font-weight-bold text-dark my-3") Item: #{item.name}
   
   div(style='margin-left:20px;margin-top:20px')
 
@@ -19,6 +19,6 @@ block content
     
   hr
   p
-    a(href=item.url+'/delete') Delete Item
+    a(href=item.url+'/delete' class="btn btn-success ml-4") Delete Item
   p
-    a(href=item.url+'/update') Update Item
+    a(href=item.url+'/update' class="btn btn-success ml-4") Update Item

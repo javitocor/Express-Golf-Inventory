@@ -5,33 +5,29 @@ html(lang='en')
     meta(http-equiv="content-type" content="text/html; charset=utf-8 ;")    
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'
-    integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous')
-    
-    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-    
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     div(class='container-fluid')
       div(class='row')
-        div(class='col-sm-2 bg-secondary')
+        div(class='col-sm-2 bg-dark side')
           block sidebar
-            h4(class="font-weight-bolder text-center  text-white mb-3") Golf Equipment Inc.
+            h4(class="font-weight-bolder text-center  text-white mb-3 mt-3") Golf Equipment Inc.
             ul(class='sidebar-nav')
               li 
-                a(href='/catalog' class="text-success") Home
+                a(href='/catalog' class="text-success font-weight-bold") Home
               li 
-                a(href='/catalog/items' class="text-success") All Items
+                a(href='/catalog/items' class="text-success font-weight-bold") All Items
               li 
-                a(href='/catalog/categories' class="text-success") All Categories
+                a(href='/catalog/categories' class="text-success font-weight-bold") All Categories
               li 
                 hr
               li 
-                a(href='/catalog/item/create' class="text-success") Create new item
+                a(href='/catalog/item/create' class="text-success font-weight-bold") Create new item
               li 
-                a(href='/catalog/category/create' class="text-success") Create new category
+                a(href='/catalog/category/create' class="text-success font-weight-bold") Create new category
                 
-        div(class='col-sm-10')
+        div(class='col-sm-10 px-0 side')
           block content
     script(src='https://code.jquery.com/jquery-3.2.1.min.js'
            integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='

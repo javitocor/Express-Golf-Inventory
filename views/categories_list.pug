@@ -1,12 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  
-  ul
-  each val in list_categories
-    li 
-      a(href=val.url) #{val.name}
+  h1(class="text-center font-weight-bold text-dark my-3") #{title}
+  div(class="w-50 mx-auto")
+    ul(class="list-group list-group-flush")
+    each val in list_categories
+      li(class="list-group-item list-group-item-success text-center") 
+        a(href=val.url class="font-weight-bold text-success") #{val.name}
 
-  else
-    li There are no Categories.
+    else
+      li There are no Categories.
